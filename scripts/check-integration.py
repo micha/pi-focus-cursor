@@ -199,6 +199,7 @@ class NativeTests(unittest.TestCase):
         # Pi mounts a default editor before session_start and replaces it later.
         # Wait for resource initialization, not just the early footer render.
         eventually(lambda: '[Extensions]' in capture(), lambda: 'Pi did not initialize: ' + capture())
+        self.assertIn('focus-cursor.ts', capture())
         os.write(master, b'\x1b[I')
         self.tmux('send-keys', '-t', pane, '-l', 'CURSORTEST')
         self.tmux('send-keys', '-t', pane, 'Home')

@@ -10,8 +10,8 @@
     "url": "https://github.com/micha/pi-focus-cursor.git"
   },
   "engines": { "node": ">=22.19.0" },
-  "files": ["src", "README.md", "LICENSE"],
-  "pi": { "extensions": ["./src/index.ts"] },
+  "files": ["focus-cursor.ts", "src", "README.md", "LICENSE"],
+  "pi": { "extensions": ["./focus-cursor.ts"] },
   "peerDependencies": {
     "@earendil-works/pi-coding-agent": "*",
     "@earendil-works/pi-tui": "*"

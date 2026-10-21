@@ -38,7 +38,7 @@ installation method. Pi supplies the runtime dependencies.
 To try the extension without saving an installation:
 
 ```sh
-pi --extension /path/to/pi-focus-cursor/src/index.ts
+pi --extension /path/to/pi-focus-cursor/focus-cursor.ts
 ```
 
 Remove a local installation with the same source path:

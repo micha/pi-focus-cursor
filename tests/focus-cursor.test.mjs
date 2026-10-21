@@ -3,7 +3,12 @@ import { EventEmitter } from "node:events";
 import { test } from "node:test";
 import { CustomEditor } from "@earendil-works/pi-coding-agent";
 import { CURSOR_MARKER, stripTerminalSequences, visibleWidth } from "@earendil-works/pi-tui";
+import entryPoint from "../focus-cursor.ts";
 import extension, { FOCUS_IN, FOCUS_OUT, FocusCursorEditor, startSession, withoutCursor } from "../src/index.ts";
+
+test("named package entry point exports the extension factory", () => {
+  assert.equal(entryPoint, extension);
+});
 
 const theme = { borderColor: (text) => text, selectList: {} };
 const keys = { matches: () => false };
