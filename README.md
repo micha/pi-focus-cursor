@@ -54,12 +54,9 @@ resolved.
 
 ## Terminal support
 
-The terminal must implement standard focus reporting. In regular Pi UI mode,
-the extension requests reporting with DEC private mode 1004 and releases it on
-shutdown/reload. In fullscreen mode, Pi already owns that mode, so the extension
-does not disable it. A read-only stdin observer sees fullscreen focus reports
-before Pi consumes them; Pi's input parser keeps bracketed paste from being
-mistaken for focus changes.
+The terminal must implement standard focus reporting. The extension supports
+both regular and fullscreen Pi UI modes and leaves fullscreen's focus reporting
+enabled when it unloads. Pasted text is not treated as focus changes.
 
 Inside tmux, opt in to forwarding focus events:
 
@@ -82,46 +79,15 @@ prompt's drawn cursor while another Pi component owns keyboard focus.
   reverse-video software cursor.
 - Runs only in interactive TUI sessions with terminal stdin and stdout. RPC,
   JSON, print, and redirected output are untouched.
-- Replaces the main editor through Pi's supported `CustomEditor` API. Pi has one
-  editor factory: another editor-replacement extension can override this one,
-  or vice versa. This is not automatic composition with custom/vim editors.
+- Only one main-editor replacement can be active at a time. Another
+  editor-replacement extension can override this one, or vice versa. This
+  extension does not automatically combine with custom/vim editors.
 - Validated with Pi **1.0.3**, Node **24**, and tmux **3.6a** on Linux, in both
   regular and fullscreen modes, including focus changes after `/reload`.
   Direct GUI terminal implementations and other Pi releases have not been
   independently tested.
-- Pi currently has no separate software-cursor visibility hook. The extension
-  removes only the reverse-video cell adjacent to Pi's `CURSOR_MARKER`, retaining
-  its character and width. If that rendering convention changes, unknown output
-  is left unchanged rather than stripping unrelated formatting.
-
-## Development
-
-Tests require Node 24+ for native TypeScript loading. With peer packages
-available locally:
-
-```sh
-npm install --ignore-scripts
-npm test
-```
-
-To test against an existing Pi installation without installing another copy:
-
-```sh
-PI_TEST_HOST=/path/to/pi-package npm test
-```
-
-`PI_TEST_HOST` is a test-only option; it should point to Pi's package directory
-containing `dist/index.js` and `node_modules`.
-
-Native integration tests need Python 3.10+, Pi, and tmux:
-
-```sh
-npm run test:integration
-```
-
-They use temporary configuration directories and private sockets, exercise
-local package install/remove, inspect real rendered cursor cells, and make no
-model calls. See [AGENTS.md](AGENTS.md) for development and validation rules.
+- Relies on Pi's current cursor rendering. If that changes, the cursor may stay
+  visible while unfocused; unrelated formatting is left unchanged.
 
 ## License
 
