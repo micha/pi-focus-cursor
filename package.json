@@ -1,0 +1,23 @@
+{
+  "name": "pi-focus-cursor",
+  "version": "0.1.0",
+  "description": "Hide Pi's prompt cursor when its terminal window or pane loses focus.",
+  "type": "module",
+  "license": "MIT",
+  "keywords": ["pi-package", "pi-extension", "cursor", "terminal", "focus"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/micha/pi-focus-cursor.git"
+  },
+  "engines": { "node": ">=22.19.0" },
+  "files": ["src", "README.md", "LICENSE"],
+  "pi": { "extensions": ["./src/index.ts"] },
+  "peerDependencies": {
+    "@earendil-works/pi-coding-agent": "*",
+    "@earendil-works/pi-tui": "*"
+  },
+  "scripts": {
+    "test": "node --import ./tests/host-loader.mjs --test tests/*.test.mjs",
+    "test:integration": "python3 scripts/check-integration.py"
+  }
+}
