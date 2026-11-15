@@ -25,15 +25,14 @@ pi install .
 Local packages load from the checkout without copying it. After editing or
 installing, run `/reload` in an existing Pi session, or restart Pi.
 
-Once the repository has been published on GitHub:
+From GitHub:
 
 ```sh
 pi install git:github.com/micha/pi-focus-cursor
 ```
 
-**The repository is currently local only.** The GitHub command will not work
-until it is published. No npm publication or build step is required for either
-installation method. Pi supplies the runtime dependencies.
+No npm publication or build step is required for either installation method.
+Pi supplies the runtime dependencies.
 
 To try the extension without saving an installation:
 
